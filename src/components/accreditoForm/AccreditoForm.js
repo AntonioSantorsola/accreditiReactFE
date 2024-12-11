@@ -1,7 +1,7 @@
 // src/components/AccreditoForm.js
 import React, { useState } from 'react';
-import axios from 'axios';
 import './AccreditoForm.css'; // Importiamo il CSS per stili personalizzati
+import { richiediAccredito } from '../../api/API';
 
 const AccreditoForm = () => {
     const [formData, setFormData] = useState({
@@ -27,6 +27,8 @@ const AccreditoForm = () => {
         sezioneDiAppartenenza: '',
         provinciaSezioneAIA: '',
     });
+    const [loading, setLoading] = useState(false); // Stato per il caricamento
+    const [success, setSuccess] = useState(null); // Stato per il risultato della richiesta
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
@@ -38,31 +40,26 @@ const AccreditoForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true); // Attiva il caricamento
+        setSuccess(null); // Reset del risultato precedente
+
         try {
-            const response = await axios.post('http://localhost:8080/accredito/richiediAccredito', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            if (response.status === 200) {
-                console.log('Response:', response.data); // Logga la risposta per verificarla
-                alert('Richiesta inviata con successo!');
-            } else {
-                console.error('Errore:', response.status, response.statusText);
-                alert('Si è verificato un errore.');
-            }
+            // Usa la funzione richiediAccredito dal file api.js
+            await richiediAccredito(formData);
+            setSuccess(true); // Imposta il successo
         } catch (error) {
-            console.error('Si è verificato un errore:', error);
-            alert('Errore durante l\'invio della richiesta.');
+            setSuccess(false); // Imposta il fallimento
+        } finally {
+            setLoading(false); // Disattiva il caricamento
         }
     };
-    
 
     return (
         <div className="form-container">
             <h2>Richiesta Accredito</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
+                    {/* ... tutti gli input ... */}
                     <input type="text" name="squadraCasa" value={formData.squadraCasa} onChange={handleChange} placeholder="Squadra Casa" required />
                     <input type="text" name="squadraOspite" value={formData.squadraOspite} onChange={handleChange} placeholder="Squadra Ospite" required />
                     <input type="date" name="dataDiNascita" value={formData.dataDiNascita} onChange={handleChange} placeholder="Data di Nascita" required />
@@ -85,7 +82,16 @@ const AccreditoForm = () => {
                     <input type="text" name="sezioneDiAppartenenza" value={formData.sezioneDiAppartenenza} onChange={handleChange} placeholder="Sezione di Appartenenza" required />
                     <input type="text" name="provinciaSezioneAIA" value={formData.provinciaSezioneAIA} onChange={handleChange} placeholder="Provincia Sezione AIA" required />
                 </div>
-                <button type="submit">Invia Richiesta</button>
+                <div className="button-container">
+                    <button type="submit" disabled={loading}>Invia Richiesta</button>
+                    <div className="status-placeholder">
+                        {loading && <span className="loading-bar">Caricamento...</span>}
+                        {success === true && <span className="success-message">Richiesta inviata con successo!</span>}
+                        {success === false && <span className="error-message">Errore durante l'invio della richiesta.</span>}
+                    </div>
+                </div>
+
+
             </form>
         </div>
     );
