@@ -1,0 +1,113 @@
+/* HomePage.css */
+.homepage-container {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    line-height: 1.6;
+}
+
+.homepage-header {
+    background: linear-gradient(90deg, #003366, #0066cc);
+    color: #fff;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.header-title {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.header-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.header-button {
+    padding: 10px 20px;
+    background: #ffcc00;
+    color: #003366;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.header-button:hover {
+    background: #e6b800;
+}
+
+.features-section {
+    padding: 50px 20px;
+    background: #f9f9f9;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.features-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.feature-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feature-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.feature-description {
+    font-size: 1rem;
+    color: #666;
+}
+
+.cta-section {
+    text-align: center;
+    padding: 50px 20px;
+    background: #0066cc;
+    color: #fff;
+}
+
+.cta-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.cta-button {
+    padding: 10px 20px;
+    background: #ffcc00;
+    color: #003366;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cta-button:hover {
+    background: #e6b800;
+}
+
+.homepage-footer {
+    background: #003366;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.footer-text {
+    margin: 5px 0;
+}
