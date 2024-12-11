@@ -3,13 +3,13 @@
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #333; /* Testo scuro per contrasto */
     line-height: 1.6;
 }
 
 .homepage-header {
-    background: linear-gradient(90deg, #003366, #0066cc);
-    color: #fff;
+    background: #b2e0b2; /* Verde chiaro più scuro per l'intestazione */
+    color: #333; /* Testo scuro per il contrasto */
     text-align: center;
     padding: 50px 20px;
 }
@@ -26,8 +26,8 @@
 
 .header-button {
     padding: 10px 20px;
-    background: #ffcc00;
-    color: #003366;
+    background: #90c1a0; /* Verde chiaro più scuro per il pulsante */
+    color: #fff; /* Testo bianco */
     border: none;
     font-size: 1rem;
     cursor: pointer;
@@ -35,12 +35,12 @@
 }
 
 .header-button:hover {
-    background: #e6b800;
+    background: #78b17e; /* Verde più scuro al passaggio del mouse */
 }
 
 .features-section {
     padding: 50px 20px;
-    background: #f9f9f9;
+    background: #e9f5e9; /* Verde molto chiaro per lo sfondo della sezione */
     text-align: center;
 }
 
@@ -57,12 +57,16 @@
 }
 
 .feature-card {
-    background: #fff;
+    background: #ffffff; /* Schede bianche per il contrasto */
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;
     width: 300px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombra più scura al passaggio del mouse */
 }
 
 .feature-title {
@@ -78,8 +82,8 @@
 .cta-section {
     text-align: center;
     padding: 50px 20px;
-    background: #0066cc;
-    color: #fff;
+    background: #b2e0b2; /* Verde chiaro più scuro per la sezione CTA */
+    color: #333; /* Testo scuro per il contrasto */
 }
 
 .cta-title {
@@ -89,8 +93,8 @@
 
 .cta-button {
     padding: 10px 20px;
-    background: #ffcc00;
-    color: #003366;
+    background: #90c1a0; /* Verde chiaro più scuro per il pulsante CTA */
+    color: #fff; /* Testo bianco */
     border: none;
     font-size: 1.2rem;
     cursor: pointer;
@@ -98,12 +102,12 @@
 }
 
 .cta-button:hover {
-    background: #e6b800;
+    background: #78b17e; /* Verde più scuro al passaggio del mouse */
 }
 
 .homepage-footer {
-    background: #003366;
-    color: #fff;
+    background: #90c1a0; /* Verde chiaro più scuro per il footer */
+    color: #fff; /* Testo bianco */
     text-align: center;
     padding: 20px;
 }

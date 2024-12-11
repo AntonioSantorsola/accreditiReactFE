@@ -1,26 +1,53 @@
 /* src/components/Navbar.css */
 .navbar {
-    background-color: #333;
-    color: white;
-    padding: 10px;
+    background-color: #004d40; /* Verde petrolio scuro */
+    color: #ffffff; /* Colore del testo bianco per contrasto */
+    padding: 10px 20px; /* Spaziatura più ampia per un aspetto raffinato */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra per un effetto leggermente sollevato */
+    display: flex; /* Allinea gli elementi */
+    justify-content: space-between; /* Spazia gli elementi in modo uniforme */
+    align-items: center; /* Allinea verticalmente */
 }
 
 .navbar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    display: flex;
+    display: flex; /* Mostra gli elementi su una sola riga */
+    gap: 20px; /* Spaziatura tra i link */
 }
 
 .navbar li {
-    margin-right: 20px;
+    display: inline; /* Imposta gli elementi come in-line */
 }
 
 .navbar a {
-    color: white;
-    text-decoration: none;
+    color: #ffffff; /* Colore del testo bianco */
+    text-decoration: none; /* Rimuovi la sottolineatura */
+    font-weight: 500; /* Testo leggermente più marcato */
+    padding: 5px 10px; /* Spaziatura interna */
+    border-radius: 4px; /* Angoli arrotondati per un effetto moderno */
+    transition: background-color 0.3s, color 0.3s; /* Effetto di transizione per hover */
 }
 
 .navbar a:hover {
-    text-decoration: underline;
+    background-color: #00796b; /* Verde petrolio più chiaro al passaggio del mouse */
+    color: #ffffff; /* Testo bianco per contrasto */
+}
+
+.navbar a.active {
+    background-color: #005b4f; /* Colore per la voce attiva */
+    color: #ffffff; /* Testo bianco per contrasto */
+}
+
+/* Miglioramenti per dispositivi mobili */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Disposizione verticale su dispositivi mobili */
+        align-items: flex-start; /* Allinea gli elementi a sinistra */
+    }
+    .navbar ul {
+        flex-direction: column; /* Lista in colonna */
+        gap: 10px; /* Spaziatura più piccola */
+    }
 }
