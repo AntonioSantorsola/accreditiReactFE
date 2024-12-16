@@ -44,7 +44,7 @@ button {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
+    background-color: #90c1a0;
     color: white;
     font-size: 16px;
     cursor: pointer;
@@ -54,7 +54,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #3e684c;
 }
 
 button:disabled {
@@ -83,7 +83,7 @@ button:disabled {
 
 /* Messaggi di stato */
 .loading-bar {
-    color: #007bff;
+    color: #103052;
 }
 
 .success-message {
