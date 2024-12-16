@@ -13,27 +13,36 @@ const Navbar = () => {
         navigate("/login"); // Reindirizza alla pagina di login
     };
 
+    const isAdmin = () => {
+        return roles.includes("ADMIN"); // Funzione per verificare se l'utente è admin
+    };
+
     return (
         <nav className="navbar">
-            <h1 className="navbar-title">La tua App</h1>
+            <h1 className="navbar-title">SportReserve</h1>
             <ul>
                 <li>
                     <Link to="/">Home</Link>
                 </li>
-                {roles.includes("ADMIN") && ( // Mostra Accredito se l'utente è admin
+                {isAdmin() && ( // Mostra "Richiesta Accredito" solo se l'utente è admin
                     <li>
                         <Link to="/accredito">Richiesta Accredito</Link>
                     </li>
                 )}
-                {!isAuthenticated && (
+                {isAuthenticated && isAdmin() && ( // Mostra "Admin Dashboard" solo se l'utente è loggato e admin
+                    <li>
+                        <Link to="/admin-dashboard">Admin Dashboard</Link>
+                    </li>
+                )}
+                {!isAuthenticated && ( // Mostra il link alla registrazione solo se non autenticato
                     <li>
                         <Link to="/register">Registrati</Link>
                     </li>
                 )}
                 <li>
-                    {isAuthenticated ? (
+                    {isAuthenticated ? ( // Mostra il pulsante di logout se autenticato
                         <Link to="/login" onClick={handleLogout} className="navbar-button">Logout</Link>
-                    ) : (
+                    ) : ( // Mostra il link di login se non autenticato
                         <Link to="/login" className="navbar-button">Login</Link>
                     )}
                 </li>

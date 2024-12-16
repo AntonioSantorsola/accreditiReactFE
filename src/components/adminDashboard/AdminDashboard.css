@@ -1,0 +1,84 @@
+/* src/pages/adminDashboard/AdminDashboard.css */
+
+.admin-dashboard-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa; /* Colore di sfondo chiaro */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-email,
+.select-role,
+.submit-button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.submit-button {
+    background-color: #007bff; /* Colore blu */
+    color: white;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #0056b3; /* Colore blu scuro al passaggio del mouse */
+}
+
+.user-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-button,
+.delete-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-button {
+    background-color: #ffc107; /* Colore giallo */
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #e0a800; /* Colore giallo scuro al passaggio del mouse */
+}
+
+.delete-button {
+    background-color: #dc3545; /* Colore rosso */
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #c82333; /* Colore rosso scuro al passaggio del mouse */
+}

@@ -2,8 +2,8 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {jwtDecode} from "jwt-decode";
-import './Login.css';
+import { jwtDecode } from "jwt-decode";
+import './Login.css'; // Assicurati di avere gli stili qui
 import { AuthContext } from "../context/AuthContext";
 
 const LoginForm = () => {
@@ -26,12 +26,16 @@ const LoginForm = () => {
             if (response.status === 200) {
                 const { token } = response.data;
 
-                // Decodifica il token JWT per ottenere il ruolo
+                // Decodifica il token JWT per ottenere il ruolo e username
                 const decoded = jwtDecode(token);
-                const userRole = decoded.role;
+                const userRole = decoded.roles[0]; // Assicurati di usare "roles" e non "role"
+                const username = decoded.username; // Assicurati di avere username nel token
 
                 // Utilizza il contesto per il login
                 login(token, userRole);
+
+                // Salva username nel localStorage
+                localStorage.setItem("username", username);
 
                 // Reindirizza in base al ruolo
                 if (userRole === "ADMIN") {
@@ -42,7 +46,7 @@ const LoginForm = () => {
             }
         } catch (err) {
             setError(
-                err.response?.data?.message || "Errore durante il login. Controlla email e password."
+                err.response?.data?.message || "Email e/o password non validi"
             );
         }
     };
@@ -50,7 +54,7 @@ const LoginForm = () => {
     return (
         <div className="login-container">
             <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="login-form">
                 <input
                     type="email"
                     name="email"
@@ -67,7 +71,7 @@ const LoginForm = () => {
                     onChange={handleChange}
                     required
                 />
-                <button type="submit">Login</button>
+                <button type="submit" className="login-button">Login</button>
                 {error && <p className="error">{error}</p>}
             </form>
         </div>
