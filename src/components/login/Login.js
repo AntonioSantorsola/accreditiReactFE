@@ -1,56 +1,77 @@
-import React, { useState } from 'react';
+// src/components/login/Login.js
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import {jwtDecode} from "jwt-decode";
+import './Login.css';
+import { AuthContext } from "../context/AuthContext";
 
-const Login = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+const LoginForm = () => {
+    const [formData, setFormData] = useState({ email: "", password: "" });
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+    const { login } = useContext(AuthContext); // Accedi al contesto di autenticazione
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const user = { username, password };
+        setError(null);
 
-        // Invio della richiesta di login al backend
-        const response = await fetch('http://localhost:8080/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(user),
-        });
+        try {
+            const response = await axios.post("http://localhost:8080/api/v1/auth/signin", formData);
+            if (response.status === 200) {
+                const { token } = response.data;
 
-        if (response.ok) {
-            alert('Login avvenuto con successo!');
-            // Qui puoi gestire il redirect o la logica successiva
-        } else {
-            alert('Login fallito, controlla i dettagli.');
+                // Decodifica il token JWT per ottenere il ruolo
+                const decoded = jwtDecode(token);
+                const userRole = decoded.role;
+
+                // Utilizza il contesto per il login
+                login(token, userRole);
+
+                // Reindirizza in base al ruolo
+                if (userRole === "ADMIN") {
+                    navigate("/admin-dashboard");
+                } else {
+                    navigate("/");
+                }
+            }
+        } catch (err) {
+            setError(
+                err.response?.data?.message || "Errore durante il login. Controlla email e password."
+            );
         }
     };
 
     return (
-        <div>
-            <h2>Login</h2>
+        <div className="login-container">
+            <h1>Login</h1>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Username:</label>
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                />
                 <button type="submit">Login</button>
+                {error && <p className="error">{error}</p>}
             </form>
         </div>
     );
 };
 
-export default Login;
+export default LoginForm;

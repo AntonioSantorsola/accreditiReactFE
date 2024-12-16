@@ -1,55 +1,91 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./Register.css"; // Importa il file CSS
 
-const Register = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+function RegistrationForm() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const user = { username, password };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-        // Invio della richiesta di registrazione al backend
-        const response = await fetch('http://localhost:8080/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(user),
-        });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(false);
 
-        if (response.ok) {
-            alert('Registrazione avvenuta con successo!');
-        } else {
-            alert('Registrazione fallita, controlla i dettagli.');
-        }
-    };
+    try {
+      const response = await axios.post("http://localhost:8080/api/v1/auth/signup", formData);
+      if (response.status === 200) {
+        setSuccess(true);
+        alert("Registrazione completata! Reindirizzamento al login...");
+        navigate("/login");
+      }
+    } catch (err) {
+      setError(
+        err.response?.data?.message || "Errore durante la registrazione. Riprova."
+      );
+    }
+  };
 
-    return (
-        <div>
-            <h2>Registrati</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Username:</label>
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Registrati</button>
-            </form>
-        </div>
-    );
-};
+  return (
+    <div className="registration-container">
+      <h1>Registrati</h1>
+      <form onSubmit={handleSubmit} className="registration-form">
+        <input
+          type="text"
+          name="firstName"
+          placeholder="Nome"
+          value={formData.firstName}
+          onChange={handleChange}
+          required
+          className="registration-input"
+        />
+        <input
+          type="text"
+          name="lastName"
+          placeholder="Cognome"
+          value={formData.lastName}
+          onChange={handleChange}
+          required
+          className="registration-input"
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          className="registration-input"
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+          className="registration-input"
+        />
+        <button type="submit" className="registration-button">
+          Registrati
+        </button>
+        {error && <p className="registration-error">{error}</p>}
+        {success && <p className="registration-success">Registrazione completata!</p>}
+      </form>
+    </div>
+  );
+}
 
-export default Register;
+export default RegistrationForm;
