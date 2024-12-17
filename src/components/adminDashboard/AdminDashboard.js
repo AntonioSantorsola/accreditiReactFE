@@ -152,8 +152,15 @@ const AdminDashboard = () => {
                             <td>{user.email}</td>
                             <td>{user.role}</td>
                             <td>
-                                <button onClick={() => handleEdit(user)}>Modifica</button>
-                                <button onClick={() => handleDelete(user.id)}>Rimuovi</button>
+                                {user.role === 'USER' && ( // Mostra i pulsanti solo per gli USER
+                                    <>
+                                        <button onClick={() => handleEdit(user)}>Modifica</button>
+                                        <button onClick={() => handleDelete(user.id)}>Rimuovi</button>
+                                    </>
+                                )}
+                                {user.role === 'ADMIN' && (
+                                    <span>Non puoi modificare o eliminare un Admin</span>
+                                )}
                             </td>
                         </tr>
                     ))}
