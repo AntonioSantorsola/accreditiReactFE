@@ -25,6 +25,7 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(true);
         setRoles(decodedToken.roles || []); // Imposta i ruoli, se presenti
     };
+    
 
     const logout = () => {
         localStorage.removeItem("token");

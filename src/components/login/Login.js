@@ -20,23 +20,23 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
-
+    
         try {
             const response = await axios.post("http://localhost:8080/api/v1/auth/signin", formData);
             if (response.status === 200) {
                 const { token } = response.data;
-
-                // Decodifica il token JWT per ottenere il ruolo e username
+    
+                // Utilizza il contesto per il login
+                login(token); // Passa solo il token
+    
+                // Decodifica il token per ottenere ruoli
                 const decoded = jwtDecode(token);
                 const userRole = decoded.roles[0]; // Assicurati di usare "roles" e non "role"
                 const username = decoded.username; // Assicurati di avere username nel token
-
-                // Utilizza il contesto per il login
-                login(token, userRole);
-
+    
                 // Salva username nel localStorage
                 localStorage.setItem("username", username);
-
+    
                 // Reindirizza in base al ruolo
                 if (userRole === "ADMIN") {
                     navigate("/admin-dashboard");
@@ -50,6 +50,7 @@ const LoginForm = () => {
             );
         }
     };
+    
 
     return (
         <div className="login-container">
