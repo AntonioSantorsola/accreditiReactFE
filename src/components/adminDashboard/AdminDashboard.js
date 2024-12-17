@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import './AdminDashboard.css';
 import axiosInstance from '../../interceptor/axiosInstance';
@@ -6,62 +6,51 @@ import axiosInstance from '../../interceptor/axiosInstance';
 const AdminDashboard = () => {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
-    const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '' });
+    const [formData, setFormData] = useState({ firstName: '', secondName: '', email: '', password: '' });
     const [editingUser, setEditingUser] = useState(null);
     const [error, setError] = useState(null);
 
-    // Funzione per ottenere tutti gli utenti
     const fetchUsers = useCallback(async () => {
         try {
-            const response = await axiosInstance.get('/admin/users'); // Cambiato l'endpoint
+            const response = await axiosInstance.get('/admin/users'); 
             setUsers(response.data);
         } catch (err) {
             console.error('Errore nel recuperare gli utenti:', err);
             if (err.response && err.response.status === 403) {
-                navigate('/login'); // Reindirizza alla pagina di login se 403
+                navigate('/login'); 
             }
         }
-    }, [navigate]); // Aggiungi navigate come dipendenza
+    }, [navigate]);
 
-    // Fetch utenti all'avvio del componente
     useEffect(() => {
-        fetchUsers(); // Richiama la funzione per ottenere gli utenti
-    }, [fetchUsers]); // Includi fetchUsers nelle dipendenze
+        fetchUsers(); 
+    }, [fetchUsers]);
 
-    // Gestisce il cambiamento dei campi del form
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    // Gestisce il submit del form
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
 
         try {
             if (editingUser) {
-                // Aggiorna utente esistente
-                const response = await axiosInstance.put(`/admin/update/${editingUser.id}`, {
-                    firstName: formData.firstName,
-                    lastName: formData.lastName,
-                    email: formData.email,
-                    password: formData.password, // Aggiungi solo se necessario
+                // Aggiorna utente
+                const response = await axiosInstance.put(`/admin/update/${editingUser.id}`, { 
+                    ...formData, 
+                    role: editingUser.role // Mantiene il ruolo esistente
                 });
-                setUsers(users.map(user => (user.id === editingUser.id ? response.data : user))); // Aggiorna l'array di utenti
+                setUsers(users.map(user => (user.id === editingUser.id ? response.data : user)));
             } else {
                 // Crea nuovo utente
-                const response = await axiosInstance.post('http://localhost:8080/api/v1/auth/signup', {
-                    firstName: formData.firstName,
-                    lastName: formData.lastName,
-                    email: formData.email,
-                    password: formData.password,
-                });
-                setUsers([...users, response.data]); // Aggiungi il nuovo utente alla lista
+                const response = await axiosInstance.post('/signup', formData); // Cambiato a '/signup'
+                setUsers([...users, response.data]);
             }
 
             // Resetta il form
-            setFormData({ firstName: '', lastName: '', email: '', password: '' });
+            setFormData({ firstName: '', secondName: '', email: '', password: '' });
             setEditingUser(null);
         } catch (err) {
             if (err.response && (err.response.status === 400 || err.response.status === 409)) {
@@ -72,17 +61,20 @@ const AdminDashboard = () => {
         }
     };
 
-    // Gestisce l'editing di un utente
     const handleEdit = (user) => {
-        setFormData({ firstName: user.firstName, lastName: user.lastName, email: user.email, password: '' });
-        setEditingUser(user);
+        setFormData({ 
+            firstName: user.firstName, 
+            secondName: user.secondName, 
+            email: user.email, 
+            password: '' // Non impostiamo la password qui
+        });
+        setEditingUser(user); // Imposta l'utente in modifica
         setError(null);
     };
 
-    // Gestisce l'eliminazione di un utente
     const handleDelete = async (id) => {
         try {
-            await axiosInstance.delete(`/admin/delete/${id}`); // Cambiato l'endpoint
+            await axiosInstance.delete(`/admin/delete/${id}`); 
             setUsers(users.filter(user => user.id !== id));
         } catch (err) {
             console.error('Errore nella rimozione dell\'utente:', err);
@@ -92,7 +84,7 @@ const AdminDashboard = () => {
     return (
         <div className="admin-dashboard-container">
             <h1>Admin Dashboard</h1>
-            {error && <p className="error">{error}</p>} {/* Mostra errori */}
+            {error && <p className="error">{error}</p>}
             <form onSubmit={handleSubmit} className="admin-form">
                 <input
                     type="text"
@@ -104,9 +96,9 @@ const AdminDashboard = () => {
                 />
                 <input
                     type="text"
-                    name="lastName"
+                    name="secondName"
                     placeholder="Cognome"
-                    value={formData.lastName}
+                    value={formData.secondName}
                     onChange={handleChange}
                     required
                 />
@@ -124,8 +116,21 @@ const AdminDashboard = () => {
                     placeholder="Password"
                     value={formData.password}
                     onChange={handleChange}
-                    required={editingUser === null} // Richiedi password solo se non stai modificando un utente
+                    required={!editingUser} // Richiede password solo se non stai modificando
                 />
+                {/* Mostra il ruolo solo in modalità di modifica */}
+                {editingUser && (
+                    <select 
+                        name="role" 
+                        value={editingUser.role} 
+                        onChange={(e) => setEditingUser({ ...editingUser, role: e.target.value })} 
+                        required
+                    >
+                        <option value="">Seleziona il ruolo</option>
+                        <option value="USER">Utente</option>
+                        {/* <option value="ADMIN">Admin</option> */}
+                    </select>
+                )}
                 <button type="submit">{editingUser ? 'Aggiorna Utente' : 'Aggiungi Utente'}</button>
             </form>
             <h2>Utenti Registrati</h2>
@@ -135,6 +140,7 @@ const AdminDashboard = () => {
                         <th>Nome</th>
                         <th>Cognome</th>
                         <th>Email</th>
+                        <th>Ruolo</th>
                         <th>Azioni</th>
                     </tr>
                 </thead>
@@ -142,8 +148,9 @@ const AdminDashboard = () => {
                     {users.map((user) => (
                         <tr key={user.id}>
                             <td>{user.firstName}</td>
-                            <td>{user.lastName}</td>
+                            <td>{user.secondName}</td>
                             <td>{user.email}</td>
+                            <td>{user.role}</td>
                             <td>
                                 <button onClick={() => handleEdit(user)}>Modifica</button>
                                 <button onClick={() => handleDelete(user.id)}>Rimuovi</button>
