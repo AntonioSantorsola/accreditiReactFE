@@ -12,19 +12,20 @@ export const AuthProvider = ({ children }) => {
         if (token) {
             const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decodifica il token JWT
             setIsAuthenticated(true);
-            setRoles(decodedToken.roles); // Imposta i ruoli
+            setRoles(decodedToken.roles || []); // Imposta i ruoli, se presenti
         } else {
             setIsAuthenticated(false);
             setRoles([]); // Resetta i ruoli se non autenticato
         }
     }, []);
 
-    const login = (token, role) => {
+    const login = (token) => {
         localStorage.setItem("token", token);
         const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decodifica il token JWT
         setIsAuthenticated(true);
-        setRoles(decodedToken.roles); // Imposta i ruoli
+        setRoles(decodedToken.roles || []); // Imposta i ruoli, se presenti
     };
+    
 
     const logout = () => {
         localStorage.removeItem("token");
@@ -32,8 +33,12 @@ export const AuthProvider = ({ children }) => {
         setRoles([]); // Resetta i ruoli al logout
     };
 
+    const isAdmin = () => {
+        return roles.includes('ADMIN'); // Funzione per controllare se l'utente è admin
+    };
+
     return (
-        <AuthContext.Provider value={{ isAuthenticated, roles, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, roles, login, logout, isAdmin }}>
             {children}
         </AuthContext.Provider>
     );

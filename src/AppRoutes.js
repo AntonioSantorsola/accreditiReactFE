@@ -8,6 +8,7 @@ import NotFound from './pages/notFound/NotFound';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import PrivateRoute from './components/PrivateRoute';
+import AdminDashboard from './components/adminDashboard/AdminDashboard';
 
 const AppRoutes = () => {
     return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/admin-dashboard" element={<AdminDashboard />} /> {/* Nuova rotta */}
             <Route 
                 path="/accredito" 
                 element={

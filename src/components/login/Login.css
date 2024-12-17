@@ -1,38 +1,46 @@
-/* Login.css */
-
+/* src/components/login/Login.css */
 .login-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .login-input {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-  
-  .login-button {
-    padding: 10px;
-    font-size: 16px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .login-error {
-    color: red;
-    font-size: 14px;
-  }
-  
+  max-width: 400px; /* Larghezza massima del contenitore */
+  margin: auto; /* Centra il contenitore */
+  padding: 20px; /* Padding interno */
+  border-radius: 8px; /* Angoli arrotondati */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombra per un effetto sollevato */
+  background-color: #fff; /* Sfondo bianco */
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column; /* Layout verticale */
+}
+
+.login-form input {
+  margin-bottom: 15px; /* Spaziatura tra i campi */
+  padding: 10px; /* Spaziatura interna */
+  border: 1px solid #ccc; /* Bordo grigio */
+  border-radius: 4px; /* Angoli arrotondati */
+}
+
+.login-form input:focus {
+  border-color: #00796b; /* Colore del bordo al focus */
+  outline: none; /* Rimuovi il contorno */
+}
+
+.login-button {
+  padding: 10px; /* Spaziatura interna */
+  background-color: #004d40; /* Verde petrolio */
+  color: white; /* Testo bianco */
+  border: none; /* Rimuovi il bordo */
+  border-radius: 4px; /* Angoli arrotondati */
+  cursor: pointer; /* Cambia il cursore */
+  transition: background-color 0.3s; /* Transizione per hover */
+}
+
+.login-button:hover {
+  background-color: #00796b; /* Verde petrolio più chiaro al passaggio del mouse */
+}
+
+.error {
+  color: red; /* Colore del testo di errore */
+  margin-top: 10px; /* Spaziatura sopra l'errore */
+  text-align: center; /* Centra il testo di errore */
+}

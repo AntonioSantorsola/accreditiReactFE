@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react'; // Importa useContext
+import { Link } from 'react-router-dom'; // Importa Link da react-router-dom
 import './Homepage.css';
+import { AuthContext } from '../../components/context/AuthContext';
 
 const HomePage = () => {
+    const { isAuthenticated } = useContext(AuthContext); // Accedi al contesto di autenticazione
+
     return (
         <div className="homepage-container">
             {/* Header Section */}
@@ -9,7 +13,12 @@ const HomePage = () => {
                 <div className="header-content">
                     <h1 className="header-title">Gestione Prenotazioni Campi Serie A</h1>
                     <p className="header-subtitle">Accesso esclusivo per arbitri FIGC</p>
-                    <button className="header-button">Accedi al Portale</button>
+                    {/* Mostra il pulsante solo se l'utente non è autenticato */}
+                    {!isAuthenticated && (
+                        <Link to="/login">
+                            <button className="header-button">Accedi al Portale</button>
+                        </Link>
+                    )}
                 </div>
             </header>
 
@@ -35,7 +44,12 @@ const HomePage = () => {
             {/* Call to Action */}
             <section className="cta-section">
                 <h2 className="cta-title">Pronto a gestire le tue prenotazioni?</h2>
-                <button className="cta-button">Registrati Ora</button>
+                {/* Mostra il pulsante solo se l'utente non è autenticato */}
+                {!isAuthenticated && (
+                    <Link to="/register">
+                        <button className="cta-button">Registrati Ora</button>
+                    </Link>
+                )}
             </section>
 
             {/* Footer Section */}
