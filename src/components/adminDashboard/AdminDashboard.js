@@ -45,7 +45,14 @@ const AdminDashboard = () => {
                 setUsers(users.map(user => (user.id === editingUser.id ? response.data : user)));
             } else {
                 // Crea nuovo utente
-                const response = await axiosInstance.post('/signup', formData); // Cambiato a '/signup'
+                const newUserPayload = {
+                    firstName: formData.firstName,
+                    lastName: formData.secondName, // Cambiato per utilizzare 'lastName'
+                    email: formData.email,
+                    password: formData.password
+                };
+
+                const response = await axiosInstance.post('/auth/signup', newUserPayload); // Cambiato a '/signup'
                 setUsers([...users, response.data]);
             }
 
