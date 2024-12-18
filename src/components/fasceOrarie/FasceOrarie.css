@@ -1,35 +1,25 @@
-/* src/components/FasceOrarie.css */
+/* src/components/fasceOrarie/FasceOrarie.css */
 
 .fasce-orarie-container {
-    padding: 20px;
-    text-align: center;
-}
-
-.fasce-orarie-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Cambia la dimensione minima a tuo piacimento */
-    gap: 10px; /* Spazio tra le colonne */
+    display: flex;
+    flex-direction: column;
 }
 
 .fascia-oraria {
-    background-color: #f0f0f0;
-    padding: 15px;
-    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.fascia-oraria:hover {
-    background-color: #e0e0e0;
-}
-
-.disponibile {
-    background-color: #4caf50; /* Verde per le fasce disponibili */
+.fascia-oraria.disponibile {
+    background-color: green; /* Verde per disponibile */
     color: white;
 }
 
-.non-disponibile {
-    background-color: #f44336; /* Rosso per le fasce non disponibili */
+.fascia-oraria.non-disponibile {
+    background-color: red; /* Rosso per non disponibile */
     color: white;
-    pointer-events: none; /* Disabilita il clic sulle fasce non disponibili */
+    pointer-events: none; /* Disabilita il click sugli elementi non disponibili */
 }

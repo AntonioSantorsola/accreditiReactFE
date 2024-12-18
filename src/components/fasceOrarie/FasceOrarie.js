@@ -1,34 +1,28 @@
-// src/components/FasceOrarie.js
+// src/components/fasceOrarie/FasceOrarie.js
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import './FasceOrarie.css'; // Assicurati di avere un file CSS per gli stili
 
-const FasceOrarie = ({ fasceOrarie = [], campoId, selectedDate }) => {
-    const navigate = useNavigate();
+const FasceOrarie = ({ fasceOrarie, campoId, selectedDate, onSelectFascia }) => {
+    console.log('Fasce orarie ricevute:', fasceOrarie); // Log delle fasce orarie
 
-    const handleOrarioClick = (fasciaOraria) => {
-        if (fasciaOraria.disponibile) {
-            // Naviga al modulo di prenotazione
-            const dataInizio = `${selectedDate}T${fasciaOraria.fasciaOraria.split('-')[0]}:00`;
-            const dataFine = `${selectedDate}T${fasciaOraria.fasciaOraria.split('-')[1]}:00`;
-            navigate(`/prenotazione`, { state: { campoId, dataInizio, dataFine } });
-        }
-    };
+    if (!fasceOrarie || fasceOrarie.length === 0) {
+        return <div>Nessuna fascia oraria disponibile.</div>;
+    }
 
     return (
-        <div className="fasce-orarie">
-            {fasceOrarie.length > 0 ? (
-                fasceOrarie.map((fascia) => (
+        <div>
+            <h2>Fasce Orarie Disponibili per il {selectedDate}</h2>
+            <div className="fasce-orarie-container">
+                {fasceOrarie.map((fascia, index) => (
                     <div
-                        key={fascia.fasciaOraria}
-                        className={`fascia ${fascia.disponibile ? 'disponibile' : 'non-disponibile'}`}
-                        onClick={() => handleOrarioClick(fascia)}
+                        key={index}
+                        className={`fascia-oraria ${fascia.disponibile ? 'disponibile' : 'non-disponibile'}`}
+                        onClick={fascia.disponibile ? () => onSelectFascia(fascia.fasciaOraria) : null} // Gestisci il click solo per quelle disponibili
                     >
                         {fascia.fasciaOraria}
                     </div>
-                ))
-            ) : (
-                <p>Nessuna fascia oraria disponibile.</p>
-            )}
+                ))}
+            </div>
         </div>
     );
 };

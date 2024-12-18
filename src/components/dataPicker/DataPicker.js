@@ -1,21 +1,14 @@
-// src/components/DataPicker.js
+// src/components/dataPicker/DataPicker.js
 import React from 'react';
 
 const DataPicker = ({ onSelectDate }) => {
     const handleChange = (event) => {
-        const selectedDate = event.target.value; // Ottieni la data selezionata dall'input
-        onSelectDate(selectedDate); // Chiama la funzione passata come prop per notificare il cambiamento
+        const selectedDate = event.target.value; // Supponendo tu stia usando un input di tipo date
+        onSelectDate(selectedDate); // Chiama la funzione per passare la data al genitore
     };
 
     return (
-        <div className="data-picker">
-            <label htmlFor="date">Seleziona una data:</label>
-            <input
-                type="date"
-                id="date"
-                onChange={handleChange} // Gestisci il cambiamento della data
-            />
-        </div>
+        <input type="date" onChange={handleChange} />
     );
 };
 
