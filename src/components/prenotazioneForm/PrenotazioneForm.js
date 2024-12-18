@@ -3,7 +3,7 @@ import React from 'react';
 import axiosInstance from '../../interceptor/axiosInstance'; // Importa l'istanza di Axios
 import './PrenotazioneForm.css'; // Importa il file CSS
 
-const PrenotazioneForm = ({ campoId, selectedDate, selectedFasciaOraria, costo, numeroGiocatori, onChangeNumeroGiocatori, campoNome }) => {
+const PrenotazioneForm = ({ campoId, selectedDate, selectedFasciaOraria, costo, numeroGiocatori, onChangeNumeroGiocatori, campoNome, onUpdateFasceOrarie }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -51,10 +51,11 @@ const PrenotazioneForm = ({ campoId, selectedDate, selectedFasciaOraria, costo, 
             // Esegui la richiesta POST
             const response = await axiosInstance.post('/prenotazioni', prenotazioneData);
             console.log('Prenotazione effettuata con successo:', response.data);
-            // Aggiungi logica per gestire il successo della prenotazione (es. mostrare un messaggio di successo)
+
+            // Aggiorna le fasce orarie
+            onUpdateFasceOrarie(selectedFasciaOraria);
         } catch (error) {
             console.error('Errore nella prenotazione:', error);
-            // Aggiungi logica per gestire l'errore nella prenotazione (es. mostrare un messaggio di errore)
         }
     };
 

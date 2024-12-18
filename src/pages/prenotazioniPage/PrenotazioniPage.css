@@ -1,6 +1,24 @@
 /* src/pages/PrenotazioniPage.css */
-.prenotazioni-container {
-    display: flex; /* Usa flexbox */
-    justify-content: space-between; /* Spaziatura tra i componenti */
-    flex-wrap: wrap; /* Permette di andare a capo */
+.prenotazioni-page {
+    max-width: 1200px; /* Limita la larghezza massima */
+    margin: 0 auto; /* Centra la pagina */
+    padding: 20px; /* Aggiungi padding */
+    font-family: 'Arial', sans-serif; /* Imposta un font professionale */
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Colonne reattive */
+    gap: 20px; /* Spazio tra gli elementi */
+}
+
+.campo-list,
+.data-picker,
+.fasce-orarie {
+    background-color: #f8f8f8; /* Sfondo chiaro */
+    border-radius: 8px; /* Angoli arrotondati */
+    padding: 15px; /* Padding interno */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+    display: flex; /* Utilizza flexbox per il layout interno */
+    flex-direction: column; /* Colonne in verticale */
 }

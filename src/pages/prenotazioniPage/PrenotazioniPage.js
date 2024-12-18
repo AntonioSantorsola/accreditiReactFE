@@ -5,7 +5,7 @@ import DataPicker from '../../components/dataPicker/DataPicker';
 import FasceOrarie from '../../components/fasceOrarie/FasceOrarie';
 import PrenotazioneForm from '../../components/prenotazioneForm/PrenotazioneForm';
 import axiosInstance from '../../interceptor/axiosInstance';
-import './PrenotazioniPage.css'; // Importa il file CSS per PrenotazioniPage
+import './PrenotazioniPage.css'; // Aggiungi il tuo CSS personalizzato
 
 const PrenotazioniPage = () => {
     const [campoId, setCampoId] = useState(null);
@@ -14,7 +14,6 @@ const PrenotazioniPage = () => {
     const [selectedFasciaOraria, setSelectedFasciaOraria] = useState('');
     const [numeroGiocatori, setNumeroGiocatori] = useState(2);
     const [fasceOrarie, setFasceOrarie] = useState([]);
-    const currentDate = new Date().toISOString().split('T')[0];
 
     const handleCampoSelect = (campo) => {
         setCampoId(campo.id);
@@ -30,7 +29,7 @@ const PrenotazioniPage = () => {
 
             try {
                 const response = await axiosInstance.get(`/prenotazioni/disponibilita/${campoId}?giorno=${giorno}`);
-                setFasceOrarie(response.data);
+                setFasceOrarie(response.data); // Assicurati che la risposta sia nel formato corretto
             } catch (error) {
                 console.error('Errore nel recupero delle fasce orarie:', error);
                 setFasceOrarie([]);
@@ -40,17 +39,33 @@ const PrenotazioniPage = () => {
         fetchFasceOrarie();
     }, [campoId, selectedDate]);
 
+    const onUpdateFasceOrarie = (fasciaOraria) => {
+        setFasceOrarie((prevFasce) => 
+            prevFasce.map(fascia =>
+                fascia.fasciaOraria === fasciaOraria
+                    ? { ...fascia, disponibile: false } // Aggiorna la fascia per renderla non disponibile
+                    : fascia
+            )
+        );
+    };
+
     return (
-        <div>
+        <div className="prenotazioni-page">
             <h1>Prenotazione Campo</h1>
-            <div className="prenotazioni-container">
-                <CampoList onSelectCampo={handleCampoSelect} />
-                <DataPicker onSelectDate={setSelectedDate} />
+            <div className="grid-container">
+                <div className="campo-list">
+                    <CampoList onSelectCampo={handleCampoSelect} />
+                </div>
+                <div className="data-picker">
+                    <DataPicker onSelectDate={setSelectedDate} />
+                </div>
                 {campoId && selectedDate && fasceOrarie.length > 0 && (
-                    <FasceOrarie 
-                        fasceOrarie={fasceOrarie} 
-                        onSelectFascia={setSelectedFasciaOraria} 
-                    />
+                    <div className="fasce-orarie">
+                        <FasceOrarie 
+                            fasceOrarie={fasceOrarie} 
+                            onSelectFascia={setSelectedFasciaOraria} 
+                        />
+                    </div>
                 )}
             </div>
             {campoId && selectedDate && selectedFasciaOraria && (
@@ -61,7 +76,7 @@ const PrenotazioniPage = () => {
                     costo={costoCampo}
                     numeroGiocatori={numeroGiocatori}
                     onChangeNumeroGiocatori={setNumeroGiocatori}
-                    currentDate={currentDate}
+                    onUpdateFasceOrarie={onUpdateFasceOrarie} // Passa la funzione qui
                 />
             )}
         </div>

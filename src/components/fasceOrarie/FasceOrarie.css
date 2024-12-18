@@ -1,29 +1,35 @@
-/* src/components/FasceOrarie.css */
+/* src/components/fasceOrarie/FasceOrarie.css */
 .fasce-orarie-container {
-    display: flex; /* Usa flexbox per disporre le fasce orarie */
-    flex-wrap: wrap; /* Permette alle fasce orarie di andare a capo */
-    gap: 5px; /* Spaziatura tra le fasce orarie */
+    display: flex; /* Utilizza flexbox per il layout */
+    flex-direction: column; /* Colonne in verticale */
+    background-color: #f8f8f8; /* Sfondo chiaro */
+    border-radius: 8px; /* Angoli arrotondati */
+    padding: 15px; /* Padding interno */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombra leggera */
 }
 
-.fascia-oraria {
-    padding: 8px; /* Aggiungi padding per una migliore interazione */
-    border: 1px solid #ccc; /* Bordo per ogni fascia oraria */
-    border-radius: 4px; /* Angoli arrotondati */
-    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
-    background-color: #f9f9f9; /* Colore di sfondo chiaro */
-    transition: background-color 0.3s; /* Transizione per hover */
-    flex: 1 0 30%; /* Flessibilità per dimensioni */
-    text-align: center; /* Allinea il testo al centro */
+.fasce-orarie-container h2 {
+    margin-bottom: 10px; /* Margine sotto il titolo */
+    font-size: 1.5rem; /* Dimensione del font */
 }
 
-.fascia-oraria:hover {
-    background-color: #e0f7fa; /* Colore di sfondo al passaggio del mouse */
+.fasce-orarie-container .fascia-oraria {
+    padding: 10px; /* Padding per ciascuna fascia oraria */
+    margin: 5px 0; /* Margine tra le fasce orarie */
+    border: 1px solid #ddd; /* Bordo grigio */
+    border-radius: 5px; /* Angoli arrotondati */
+    cursor: pointer; /* Cursore a mano */
+    transition: background-color 0.3s; /* Transizione per il colore di sfondo */
 }
 
-.fascia-oraria.disponibile {
-    background-color: #d4edda; /* Verde chiaro per disponibile */
+.fasce-orarie-container .fascia-oraria.disponibile {
+    background-color: #e0f7fa; /* Colore di sfondo per fasce disponibili */
 }
 
-.fascia-oraria.non-disponibile {
-    background-color: #f8d7da; /* Rosso chiaro per non disponibile */
+.fasce-orarie-container .fascia-oraria.non-disponibile {
+    background-color: #f8d7da; /* Colore di sfondo per fasce non disponibili */
+}
+
+.fasce-orarie-container .fascia-oraria:hover {
+    background-color: #b2ebf2; /* Colore al passaggio del mouse */
 }

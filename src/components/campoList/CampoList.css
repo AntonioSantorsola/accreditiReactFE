@@ -1,29 +1,43 @@
-/* src/components/CampoList.css */
+/* src/components/campoList/CampoList.css */
 .campo-list-container {
-    margin: 10px; /* Margini ridotti */
-    max-width: 250px; /* Limita la larghezza massima */
+    display: flex; /* Utilizza flexbox per il layout */
+    flex-direction: column; /* Colonne in verticale */
+    background-color: #f8f8f8; /* Sfondo chiaro */
+    border-radius: 8px; /* Angoli arrotondati */
+    padding: 15px; /* Padding interno */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.campo-list-container h2 {
+    margin-bottom: 10px; /* Margine sotto il titolo */
+    font-size: 1.5rem; /* Dimensione del font */
 }
 
 .campo-list-container ul {
-    list-style-type: none; /* Rimuovi i punti elenco */
-    padding: 0;
+    list-style-type: none; /* Rimuove i punti elenco */
+    padding: 0; /* Rimuove il padding */
 }
 
 .campo-list-container li {
-    padding: 8px; /* Aggiungi padding per le voci */
-    margin: 5px 0; /* Margine tra le voci */
-    border: 1px solid #ccc; /* Bordo per ciascuna voce */
-    border-radius: 4px; /* Angoli arrotondati */
-    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
-    background-color: #f9f9f9; /* Colore di sfondo chiaro */
-    transition: background-color 0.3s; /* Transizione per hover */
+    padding: 10px; /* Padding interno per ogni voce */
+    border-bottom: 1px solid #ddd; /* Bordo sotto ogni voce */
+    cursor: pointer; /* Cursore a mano per indicare cliccabilità */
+    transition: background-color 0.3s; /* Transizione per il colore di sfondo */
 }
 
 .campo-list-container li:hover {
-    background-color: #e0f7fa; /* Colore di sfondo al passaggio del mouse */
+    background-color: #e8f0fe; /* Colore di sfondo al passaggio del mouse */
+}
+
+.campo-list-container li.disponibile {
+    color: #333; /* Colore del testo per le voci disponibili */
 }
 
 .campo-list-container li.non-disponibile {
-    background-color: #f8d7da; /* Colore per elementi non disponibili */
-    cursor: not-allowed; /* Cambia il cursore */
+    color: #aaa; /* Colore del testo per le voci non disponibili */
+}
+
+.campo-list-container li.selected {
+    background-color: #007bff; /* Colore di sfondo per il campo selezionato */
+    color: white; /* Colore del testo per il campo selezionato */
 }

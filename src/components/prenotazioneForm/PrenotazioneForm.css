@@ -1,63 +1,47 @@
 /* src/components/prenotazioneForm/PrenotazioneForm.css */
 .prenotazione-form {
-    display: flex; /* Usa flexbox per allineare gli elementi */
+    display: flex; /* Utilizza flexbox per allineare gli elementi */
     flex-direction: column; /* Colonne in verticale */
     max-width: 400px; /* Larghezza massima per il modulo */
-    margin: 20px auto; /* Centra il modulo con margine superiore */
+    margin: 20px auto; /* Centra il modulo orizzontalmente */
     padding: 20px; /* Padding per il contenitore */
-    border: 1px solid #ddd; /* Bordo grigio chiaro */
+    border: 1px solid #ccc; /* Bordo grigio */
     border-radius: 10px; /* Angoli arrotondati */
-    background-color: #f9f9f9; /* Sfondo grigio chiaro */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombra per profondità */
+    background-color: #fff; /* Sfondo bianco */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombra leggera */
 }
 
 .prenotazione-form h2 {
-    font-size: 1.8rem; /* Dimensione del font maggiore per il titolo */
-    color: #333; /* Colore del testo più scuro */
+    font-size: 1.5rem; /* Dimensione del font più piccola */
     margin-bottom: 15px; /* Spazio sotto il titolo */
-    text-align: center; /* Centra il titolo */
 }
 
 .prenotazione-form p {
     margin: 5px 0; /* Margini ridotti per i paragrafi */
-    color: #555; /* Colore del testo leggermente più chiaro */
 }
 
 .prenotazione-form label {
     margin-top: 10px; /* Spazio sopra le etichette */
-    font-weight: bold; /* Grassetto per le etichette */
 }
 
-.prenotazione-form input[type="number"], 
-.prenotazione-form input[type="text"], 
-.prenotazione-form input[type="date"] {
-    padding: 8px; /* Aggiungi padding per i campi di input */
-    border: 1px solid #ccc; /* Bordo grigio per i campi di input */
-    border-radius: 4px; /* Angoli arrotondati */
-    font-size: 14px; /* Dimensione del font */
-    margin-top: 5px; /* Spazio sopra i campi */
-    width: 100%; /* I campi di input si riempiono all'80% del contenitore */
-    box-sizing: border-box; /* Per includere padding e bordo nella larghezza totale */
+.prenotazione-form input[type="number"] {
+    width: 60px; /* Dimensione fissa per il campo numero di giocatori */
+    padding: 5px; /* Padding interno */
+    border: 1px solid #ccc; /* Bordo grigio */
+    border-radius: 5px; /* Angoli arrotondati */
 }
 
 .prenotazione-form button {
-    margin-top: 20px; /* Spazio sopra il pulsante */
+    margin-top: 15px; /* Spazio sopra il pulsante */
     padding: 10px; /* Padding per il pulsante */
     background-color: #007bff; /* Colore blu per il pulsante */
     color: white; /* Colore del testo */
     border: none; /* Nessun bordo */
     border-radius: 5px; /* Angoli arrotondati */
     cursor: pointer; /* Cursore a mano per indicare cliccabilità */
-    transition: background-color 0.3s, transform 0.2s; /* Transizione per l'effetto hover */
-    font-size: 16px; /* Dimensione del font del pulsante */
+    transition: background-color 0.3s; /* Transizione per l'effetto hover */
 }
 
 .prenotazione-form button:hover {
     background-color: #0056b3; /* Colore al passaggio del mouse */
-    transform: translateY(-2px); /* Leggera elevazione al passaggio del mouse */
-}
-
-.prenotazione-form .error-message {
-    color: red; /* Colore rosso per i messaggi di errore */
-    margin-top: 10px; /* Spazio sopra i messaggi di errore */
 }

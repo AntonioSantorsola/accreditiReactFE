@@ -2,9 +2,7 @@
 import React, { useState } from 'react';
 import './FasceOrarie.css'; // Assicurati di avere un file CSS per gli stili
 
-const FasceOrarie = ({ fasceOrarie, campoId, selectedDate, onSelectFascia }) => {
-    console.log('Fasce orarie ricevute:', fasceOrarie); // Log delle fasce orarie
-
+const FasceOrarie = ({ fasceOrarie, onSelectFascia }) => {
     // Stato per tenere traccia della fascia oraria selezionata
     const [selectedFascia, setSelectedFascia] = useState('');
 
@@ -21,7 +19,7 @@ const FasceOrarie = ({ fasceOrarie, campoId, selectedDate, onSelectFascia }) => 
 
     return (
         <div>
-            <h2>Fasce Orarie Disponibili per il {selectedDate}</h2>
+            <h2>Orari</h2>
             <div className="fasce-orarie-container">
                 {fasceOrarie.map((fascia, index) => (
                     <div
