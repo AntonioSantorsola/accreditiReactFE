@@ -1,0 +1,64 @@
+/* src/components/PrenotazioneForm.css */
+.prenotazione-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.prenotazione-form h2 {
+    text-align: center;
+}
+
+.prenotazione-form label {
+    margin-bottom: 5px;
+}
+
+.prenotazione-form input[type="date"],
+.prenotazione-form input[type="number"] {
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.ore-disponibili {
+    margin-top: 20px;
+}
+
+.ore-disponibili h3 {
+    margin-bottom: 10px;
+}
+
+.ore-disponibili ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.ore-disponibili li {
+    padding: 8px;
+    margin: 5px 0;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.ore-disponibili li:hover {
+    background-color: #e0e0e0;
+}
+
+.ora-disponibile {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.ora-occupata {
+    background-color: #f8d7da;
+    color: #721c24;
+    pointer-events: none;
+}

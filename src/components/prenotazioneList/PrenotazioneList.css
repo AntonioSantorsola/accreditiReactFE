@@ -1,0 +1,33 @@
+/* PrenotazioneList.css */
+
+/* Contenitore del PrenotazioneList */
+.prenotazione-list-container {
+    padding: 20px;
+    background-color: #f9f9f9; /* Sfondo chiaro */
+    border-radius: 8px; /* Angoli arrotondati */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+    margin: 20px 0; /* Margine superiore e inferiore */
+}
+
+/* Titolo */
+.prenotazione-list-container h2 {
+    font-size: 24px; /* Dimensione del font per l'intestazione */
+    color: #333; /* Colore del testo */
+    margin-bottom: 20px; /* Margine inferiore */
+    text-align: center; /* Centra il testo */
+}
+
+/* Lista delle prenotazioni */
+.prenotazione-list-container ul {
+    list-style-type: none; /* Rimuove i pallini dalla lista */
+    padding: 0; /* Rimuove il padding della lista */
+}
+
+/* Elementi della lista */
+.prenotazione-list-container li {
+    background-color: #ffffff; /* Sfondo bianco per ogni prenotazione */
+    margin: 10px 0; /* Margine superiore e inferiore */
+    padding: 15px; /* Padding per il contenuto */
+    border: 1px solid #e0e0e0; /* Bordo grigio chiaro */
+    border-radius: 5px; /* Angoli arrotondati per ogni prenotazione */
+}

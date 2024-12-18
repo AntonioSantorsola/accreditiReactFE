@@ -49,6 +49,11 @@ const Navbar = () => {
                 <li>
                     <Link to="/about">About</Link>
                 </li>
+                {isAuthenticated && ( // Mostra "Prenotazioni" solo se l'utente è autenticato
+                    <li>
+                        <Link to="/prenotazioni">Prenotazioni</Link>
+                    </li>
+                )}
             </ul>
         </nav>
     );

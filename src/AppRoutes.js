@@ -9,6 +9,8 @@ import Login from './components/login/Login';
 import Register from './components/register/Register';
 import PrivateRoute from './components/PrivateRoute';
 import AdminDashboard from './components/adminDashboard/AdminDashboard';
+import PrenotazioneForm from './components/prenotazioneForm/PrenotazioneForm';
+import PrenotazioniPage from './pages/prenotazioniPage/PrenotazioniPage';
 
 const AppRoutes = () => {
     return (
@@ -26,6 +28,16 @@ const AppRoutes = () => {
                     </PrivateRoute>
                 } 
             />
+            <Route 
+                path="/prenotazione" 
+                element={
+                    <PrivateRoute requiredRole="USER"> 
+                        <PrenotazioneForm /> 
+                    </PrivateRoute>
+                } 
+            />
+            <Route path="/prenotazioni" element={<PrenotazioniPage />} /> {/* Nuova rotta per le prenotazioni */}
+
             <Route path="*" element={<NotFound />} /> {/* Rotta per le pagine non trovate */}
         </Routes>
     );

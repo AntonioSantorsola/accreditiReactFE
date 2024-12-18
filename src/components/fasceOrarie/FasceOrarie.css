@@ -1,0 +1,35 @@
+/* src/components/FasceOrarie.css */
+
+.fasce-orarie-container {
+    padding: 20px;
+    text-align: center;
+}
+
+.fasce-orarie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Cambia la dimensione minima a tuo piacimento */
+    gap: 10px; /* Spazio tra le colonne */
+}
+
+.fascia-oraria {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.fascia-oraria:hover {
+    background-color: #e0e0e0;
+}
+
+.disponibile {
+    background-color: #4caf50; /* Verde per le fasce disponibili */
+    color: white;
+}
+
+.non-disponibile {
+    background-color: #f44336; /* Rosso per le fasce non disponibili */
+    color: white;
+    pointer-events: none; /* Disabilita il clic sulle fasce non disponibili */
+}
