@@ -1,37 +1,29 @@
 /* src/components/CampoList.css */
 .campo-list-container {
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    margin: 10px; /* Margini ridotti */
+    max-width: 250px; /* Limita la larghezza massima */
 }
 
-ul {
-    list-style-type: none;
+.campo-list-container ul {
+    list-style-type: none; /* Rimuovi i punti elenco */
     padding: 0;
 }
 
-li {
-    padding: 10px;
-    margin: 5px 0;
-    cursor: pointer;
-    border-radius: 3px;
-    transition: background-color 0.3s;
+.campo-list-container li {
+    padding: 8px; /* Aggiungi padding per le voci */
+    margin: 5px 0; /* Margine tra le voci */
+    border: 1px solid #ccc; /* Bordo per ciascuna voce */
+    border-radius: 4px; /* Angoli arrotondati */
+    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+    background-color: #f9f9f9; /* Colore di sfondo chiaro */
+    transition: background-color 0.3s; /* Transizione per hover */
 }
 
-li.disponibile {
-    background-color: #d4edda; /* Verde chiaro */
+.campo-list-container li:hover {
+    background-color: #e0f7fa; /* Colore di sfondo al passaggio del mouse */
 }
 
-li.non-disponibile {
-    background-color: #f8d7da; /* Rosso chiaro */
-    cursor: not-allowed;
-}
-
-/* src/components/FasceOrarie.css */
-.fasce-orarie-container {
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+.campo-list-container li.non-disponibile {
+    background-color: #f8d7da; /* Colore per elementi non disponibili */
+    cursor: not-allowed; /* Cambia il cursore */
 }

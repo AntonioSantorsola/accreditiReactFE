@@ -1,11 +1,19 @@
 /* src/components/DataPicker.css */
 .data-picker {
-    margin: 20px 0;
+    margin: 10px; /* Riduci i margini */
     display: flex;
     flex-direction: column;
+    max-width: 150px; /* Limita la larghezza massima */
 }
 
 .data-picker label {
     margin-bottom: 5px;
     font-weight: bold;
+}
+
+.data-picker input {
+    padding: 5px; /* Aggiungi padding per un aspetto più raffinato */
+    border: 1px solid #ccc; /* Bordo sottile */
+    border-radius: 4px; /* Aggiungi angoli arrotondati */
+    font-size: 14px; /* Font più piccolo */
 }

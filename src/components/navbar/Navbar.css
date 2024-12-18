@@ -1,57 +1,119 @@
-/* src/components/Navbar.css */
+/* Navbar Styles */
 .navbar {
-    background-color: #004d40; /* Verde petrolio scuro */
-    color: #ffffff; /* Colore del testo bianco per contrasto */
-    padding: 5px 10px; /* Riduci il padding verticale per rimpicciolire la navbar */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra per un effetto leggermente sollevato */
-    display: flex; /* Allinea gli elementi */
-    justify-content: space-between; /* Spazia gli elementi in modo uniforme */
-    align-items: center; /* Allinea verticalmente */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
 }
 
-.navbar ul {
-    list-style-type: none;
+.navbar-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
     margin: 0;
     padding: 0;
-    display: flex; /* Mostra gli elementi su una sola riga */
-    gap: 10px; /* Spaziatura tra i link (puoi ridurre anche questo) */
 }
 
-.navbar li {
-    display: inline; /* Imposta gli elementi come in-line */
+.navbar-links li {
+    position: relative;
 }
 
-.navbar a, .navbar button {
-    color: #ffffff; /* Colore del testo bianco */
-    text-decoration: none; /* Rimuovi la sottolineatura */
-    font-weight: 500; /* Testo leggermente più marcato */
-    padding: 5px 10px; /* Riduci il padding interno per i pulsanti */
-    border-radius: 4px; /* Angoli arrotondati per un effetto moderno */
-    transition: background-color 0.3s, color 0.3s; /* Effetto di transizione per hover */
-    border: none; /* Rimuovi il bordo dai pulsanti */
-    cursor: pointer; /* Cambia il cursore sui pulsanti */
-    display: flex; /* Allinea il contenuto in modo uniforme */
-    align-items: center; /* Allinea verticalmente */
+.navbar-links a,
+.navbar-links button,
+.dropdown-toggle {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
-.navbar a:hover, .navbar button:hover {
-    background-color: #00796b; /* Verde petrolio più chiaro al passaggio del mouse */
-    color: #ffffff; /* Testo bianco per contrasto */
+.navbar-links a:hover,
+.navbar-links button:hover,
+.dropdown-toggle:hover {
+    text-decoration: underline;
 }
 
-.navbar a.active {
-    background-color: #005b4f; /* Colore per la voce attiva */
-    color: #ffffff; /* Testo bianco per contrasto */
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
 }
 
-/* Miglioramenti per dispositivi mobili */
+.dropdown-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    color: black;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1000;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu li {
+    padding: 10px 15px;
+    text-align: left;
+}
+
+.dropdown-menu li:not(:last-child) {
+    border-bottom: 1px solid #eee;
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+    color: black;
+    text-decoration: none;
+    font-size: 14px;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Show Dropdown on Hover */
+.dropdown:hover .dropdown-menu {
+    display: block; /* Show the menu on hover */
+}
+
+/* Logout Button */
+.logout-button {
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+}
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column; /* Disposizione verticale su dispositivi mobili */
-        align-items: flex-start; /* Allinea gli elementi a sinistra */
+    .navbar-links {
+        flex-direction: column;
+        gap: 10px;
     }
-    .navbar ul {
-        flex-direction: column; /* Lista in colonna */
-        gap: 10px; /* Spaziatura più piccola */
+    .dropdown-menu {
+        width: 100%;
     }
 }

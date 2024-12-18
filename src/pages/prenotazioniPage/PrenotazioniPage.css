@@ -1,0 +1,6 @@
+/* src/pages/PrenotazioniPage.css */
+.prenotazioni-container {
+    display: flex; /* Usa flexbox */
+    justify-content: space-between; /* Spaziatura tra i componenti */
+    flex-wrap: wrap; /* Permette di andare a capo */
+}
