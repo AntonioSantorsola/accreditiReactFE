@@ -1,53 +1,34 @@
 // src/components/FasceOrarie.js
-import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../interceptor/axiosInstance'; // Importa l'istanza di Axios
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate per il routing
-import './FasceOrarie.css'; // Importa il file CSS
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const FasceOrarie = ({ campoId, data, userId }) => {
-    const [fasceOrarie, setFasceOrarie] = useState([]);
-    const navigate = useNavigate(); // Inizializza useNavigate per il reindirizzamento
+const FasceOrarie = ({ fasceOrarie = [], campoId, selectedDate }) => {
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchFasceOrarie = async () => {
-            try {
-                const response = await axiosInstance.get(`/prenotazioni/disponibilita/${campoId}?giorno=${data}`);
-                setFasceOrarie(response.data);
-            } catch (error) {
-                console.error('Error fetching fasce orarie:', error);
-            }
-        };
-
-        if (campoId && data) {
-            fetchFasceOrarie();
-        }
-    }, [campoId, data]);
-
-    const handleFasciaClick = (fascia) => {
-        if (fascia.disponibile) {
-            // Prepara i dati per la prenotazione
-            const dataInizio = new Date(data + 'T' + fascia.fasciaOraria.split('-')[0] + ':00'); // Imposta data e ora di inizio
-            const dataFine = new Date(data + 'T' + fascia.fasciaOraria.split('-')[1] + ':00'); // Imposta data e ora di fine
-
-            // Naviga al form di prenotazione con i dati
-            navigate('/prenotazione', { state: { campoId, userId, dataInizio, dataFine } });
+    const handleOrarioClick = (fasciaOraria) => {
+        if (fasciaOraria.disponibile) {
+            // Naviga al modulo di prenotazione
+            const dataInizio = `${selectedDate}T${fasciaOraria.fasciaOraria.split('-')[0]}:00`;
+            const dataFine = `${selectedDate}T${fasciaOraria.fasciaOraria.split('-')[1]}:00`;
+            navigate(`/prenotazione`, { state: { campoId, dataInizio, dataFine } });
         }
     };
 
     return (
-        <div className="fasce-orarie-container">
-            <h2>Fasce Orarie Disponibili per {data}</h2>
-            <div className="fasce-orarie-grid">
-                {fasceOrarie.map((fascia, index) => (
+        <div className="fasce-orarie">
+            {fasceOrarie.length > 0 ? (
+                fasceOrarie.map((fascia) => (
                     <div
-                        key={index}
-                        className={`fascia-oraria ${fascia.disponibile ? 'disponibile' : 'non-disponibile'}`}
-                        onClick={() => handleFasciaClick(fascia)}
+                        key={fascia.fasciaOraria}
+                        className={`fascia ${fascia.disponibile ? 'disponibile' : 'non-disponibile'}`}
+                        onClick={() => handleOrarioClick(fascia)}
                     >
                         {fascia.fasciaOraria}
                     </div>
-                ))}
-            </div>
+                ))
+            ) : (
+                <p>Nessuna fascia oraria disponibile.</p>
+            )}
         </div>
     );
 };

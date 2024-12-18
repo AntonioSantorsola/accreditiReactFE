@@ -1,31 +1,21 @@
 // src/components/DataPicker.js
-import React, { useState } from 'react';
+import React from 'react';
 
-const DataPicker = ({ onSelectData }) => {
-    const [data, setData] = useState('');
-
-    const handleChange = (e) => {
-        setData(e.target.value);
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (data) {
-            onSelectData(data); // Passa la data selezionata al componente padre
-        }
+const DataPicker = ({ onSelectDate }) => {
+    const handleChange = (event) => {
+        const selectedDate = event.target.value; // Ottieni la data selezionata dall'input
+        onSelectDate(selectedDate); // Chiama la funzione passata come prop per notificare il cambiamento
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Seleziona Data</h2>
-            <input 
-                type="date" 
-                value={data} 
-                onChange={handleChange} 
-                required 
+        <div className="data-picker">
+            <label htmlFor="date">Seleziona una data:</label>
+            <input
+                type="date"
+                id="date"
+                onChange={handleChange} // Gestisci il cambiamento della data
             />
-            <button type="submit">Invia</button>
-        </form>
+        </div>
     );
 };
 
