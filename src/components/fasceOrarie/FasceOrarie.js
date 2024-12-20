@@ -26,6 +26,7 @@ const FasceOrarie = ({ fasceOrarie, onSelectFascia }) => {
                         key={index}
                         className={`fascia-oraria ${fascia.disponibile ? 'disponibile' : 'non-disponibile'} ${selectedFascia === fascia.fasciaOraria ? 'selected' : ''}`}
                         onClick={() => handleFasciaClick(fascia)} // Usa la funzione di gestione del click
+                        style={{ cursor: fascia.disponibile ? 'pointer' : 'not-allowed' }} // Cambia il cursore per le fasce non disponibili
                     >
                         {fascia.fasciaOraria}
                     </div>

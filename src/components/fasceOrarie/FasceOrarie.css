@@ -1,35 +1,29 @@
 /* src/components/fasceOrarie/FasceOrarie.css */
 .fasce-orarie-container {
-    display: flex; /* Utilizza flexbox per il layout */
-    flex-direction: column; /* Colonne in verticale */
-    background-color: #f8f8f8; /* Sfondo chiaro */
-    border-radius: 8px; /* Angoli arrotondati */
-    padding: 15px; /* Padding interno */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+    display: flex;
+    flex-direction: column;
 }
 
-.fasce-orarie-container h2 {
-    margin-bottom: 10px; /* Margine sotto il titolo */
-    font-size: 1.5rem; /* Dimensione del font */
+.fascia-oraria {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 5px 0;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s; /* Aggiungi una transizione per l'effetto */
 }
 
-.fasce-orarie-container .fascia-oraria {
-    padding: 10px; /* Padding per ciascuna fascia oraria */
-    margin: 5px 0; /* Margine tra le fasce orarie */
-    border: 1px solid #ddd; /* Bordo grigio */
-    border-radius: 5px; /* Angoli arrotondati */
-    cursor: pointer; /* Cursore a mano */
-    transition: background-color 0.3s; /* Transizione per il colore di sfondo */
+.disponibile {
+    background-color: #dff0d8; /* Colore verde chiaro per le fasce disponibili */
+    color: #3c763d; /* Colore del testo verde scuro */
 }
 
-.fasce-orarie-container .fascia-oraria.disponibile {
-    background-color: #e0f7fa; /* Colore di sfondo per fasce disponibili */
+.non-disponibile {
+    background-color: #f2dede; /* Colore rosso chiaro per le fasce non disponibili */
+    color: #a94442; /* Colore del testo rosso scuro */
+    pointer-events: none; /* Disabilita l'interazione con il mouse */
 }
 
-.fasce-orarie-container .fascia-oraria.non-disponibile {
-    background-color: #f8d7da; /* Colore di sfondo per fasce non disponibili */
-}
-
-.fasce-orarie-container .fascia-oraria:hover {
-    background-color: #b2ebf2; /* Colore al passaggio del mouse */
+/* Per assicurarti che le fasce non spariscano, puoi anche dare uno stile di base */
+.fascia-oraria {
+    opacity: 1; /* Mantiene la visibilità */
 }

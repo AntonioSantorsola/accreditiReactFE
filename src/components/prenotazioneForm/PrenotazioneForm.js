@@ -3,13 +3,20 @@ import React from 'react';
 import axiosInstance from '../../interceptor/axiosInstance'; // Importa l'istanza di Axios
 import './PrenotazioneForm.css'; // Importa il file CSS
 
-const PrenotazioneForm = ({ campoId, selectedDate, selectedFasciaOraria, costo, numeroGiocatori, onChangeNumeroGiocatori, campoNome, onUpdateFasceOrarie }) => {
+const PrenotazioneForm = ({ campoId, selectedDate, selectedFasciaOraria, costo, numeroGiocatori, onChangeNumeroGiocatori, campoNome, onUpdateFasceOrarie, fasceOrarie }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!selectedFasciaOraria || !selectedDate) {
             console.error('Data o fascia oraria non validi');
             return; // Esci dalla funzione se i dati non sono validi
+        }
+
+        // Controlla se la fascia oraria selezionata è disponibile
+        const fasciaSelezionata = fasceOrarie.find(fascia => fascia.fasciaOraria === selectedFasciaOraria);
+        if (!fasciaSelezionata || !fasciaSelezionata.disponibile) {
+            console.error('La fascia oraria selezionata non è disponibile.');
+            return; // Esci dalla funzione se la fascia oraria non è disponibile
         }
 
         // Calcola gli orari di inizio e fine

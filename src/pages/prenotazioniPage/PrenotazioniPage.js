@@ -29,7 +29,7 @@ const PrenotazioniPage = () => {
 
             try {
                 const response = await axiosInstance.get(`/prenotazioni/disponibilita/${campoId}?giorno=${giorno}`);
-                setFasceOrarie(response.data); // Assicurati che la risposta sia nel formato corretto
+                setFasceOrarie(response.data);
             } catch (error) {
                 console.error('Errore nel recupero delle fasce orarie:', error);
                 setFasceOrarie([]);
@@ -41,11 +41,7 @@ const PrenotazioniPage = () => {
 
     const onUpdateFasceOrarie = (fasciaOraria) => {
         setFasceOrarie((prevFasce) => 
-            prevFasce.map(fascia =>
-                fascia.fasciaOraria === fasciaOraria
-                    ? { ...fascia, disponibile: false } // Aggiorna la fascia per renderla non disponibile
-                    : fascia
-            )
+            prevFasce.filter(fascia => fascia.fasciaOraria !== fasciaOraria)
         );
     };
 
@@ -76,7 +72,9 @@ const PrenotazioniPage = () => {
                     costo={costoCampo}
                     numeroGiocatori={numeroGiocatori}
                     onChangeNumeroGiocatori={setNumeroGiocatori}
+                    campoNome={campoId} // Assicurati di passare il nome del campo se necessario
                     onUpdateFasceOrarie={onUpdateFasceOrarie} // Passa la funzione qui
+                    fasceOrarie={fasceOrarie} // Aggiungi questa linea
                 />
             )}
         </div>
